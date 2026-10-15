@@ -39,7 +39,7 @@ def is_word_guessed(secret_word, guessed_letters):
 def play_game():
     secret_word = get_random_word()
     print("Welcome to Snowman Meltdown!")
-    print("Secret word selected: " + secret_word)  # For testing
+    print("Secret word selected: " + secret_word)  # For testing. Zeile auskommentieren, wenn wirklich gespielt werden soll.
 
     mistakes = 0
     max_mistakes = len(STAGES) - 1
