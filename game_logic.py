@@ -48,7 +48,12 @@ def play_game():
     while mistakes < max_mistakes:
         display_game_state(mistakes, secret_word, guessed_letters)
 
-        guess = input("Guess a letter: ").lower()
+        guess = input("Guess a letter: ").lower().strip()
+
+        # Eingabe-Validierung: Genau 1 Buchstabe aus dem Alphabet
+        if len(guess) != 1 or not guess.isalpha():
+            print("Please enter a single valid letter (a-z)!\n")
+            continue
 
         if guess in guessed_letters:
             print("You already guessed that letter!\n")
@@ -65,13 +70,25 @@ def play_game():
         # Gewonnen-Prüfung
         if is_word_guessed(secret_word, guessed_letters):
             display_game_state(mistakes, secret_word, guessed_letters)
-            print("Congratulations! You saved the snowman!")
+            print("Congratulations! You saved the snowman!\n")
             return
 
     # Verloren-Prüfung (Schneemann ist geschmolzen)
     display_game_state(mistakes, secret_word, guessed_letters)
-    print(f"Game Over! The snowman melted. The word was: {secret_word}")
+    print(f"Game Over! The snowman melted. The word was: {secret_word}\n")
+
+
+def main():
+    """Wiederspiel-Schleife."""
+    while True:
+        play_game()
+        play_again = (
+            input("Do you want to play again? (yes/no): ").lower().strip()
+        )
+        if play_again not in ["yes", "y"]:
+            print("Thanks for playing! Goodbye!")
+            break
 
 
 if __name__ == "__main__":
-    play_game()
+    main()
